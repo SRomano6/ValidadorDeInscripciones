@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Alumno{
+    -nombre: String
+    -legajo: Integer
+    -aprobadas: Set<Materia>
+    +tieneAprobadaCorrelativas(Materia materia)
+    +generarAlterantiva(Materia ... materias)
+}
+class Inscripcion{
+    -asignaturas: Set<Materia>
+    -alumno: Alumno
+    +aprobada()
+}
+class Materia{
+    -correlativas: Set<Materia>
+}
+Materia --o Materia
+Alumno"1" --> "*"Materia
+Alumno ..> Materia
+Alumno ..> Inscripcion
+Inscripcion ..> Alumno
+Inscripcion"1" --> "*"Materia
+Inscripcion --> Alumno
+@enduml
